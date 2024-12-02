@@ -1,39 +1,57 @@
-<MainWindow>:
-    orientation: "vertical"
-    padding: 10
-    spacing: 10
+<MainWindow>:  # Definerer layoutet for MainWindow-klassen
+    orientation: "vertical"  # Sætter layoutretningen til lodret
+    padding: 10  # Indsætter afstand (padding) rundt om layoutets indhold
+    spacing: 10  # Indsætter mellemrum mellem widgets i layoutet
 
-    TextInput:
-        id: search_input
-        hint_text: "Søg efter spil..."
-        size_hint_y: None
-        height: 40
-        on_text: root.filter_deals(self.text)
+    TextInput:  # Inputfelt til at søge efter spil
+        id: search_input  # ID for nem adgang i koden
+        hint_text: "Søg efter spil..."  # Tekst, der vises som en guide i feltet
+        size_hint_y: None  # Deaktiverer størrelsesjustering i højden
+        height: 40  # Sætter inputfeltets faste højde
+        on_text: root.filter_deals(self.text)  # Kalder filtreringsfunktionen, når brugeren indtaster tekst
 
-    Button:
-        text: "Opdater spiltilbud"
-        size_hint_y: None
-        height: 50
-        on_release: root.fetch_game_deals()
+    Button:  # Knap til at opdatere spiltilbud
+        text: "Opdater spiltilbud"  # Teksten, der vises på knappen
+        size_hint_y: None  # Deaktiverer størrelsesjustering i højden
+        height: 50  # Sætter knappens faste højde
+        on_release: root.fetch_game_deals()  # Kalder funktionen til at hente spiltilbud, når knappen trykkes
 
-    ScrollView:
-        size_hint: (1, 1)
-        GridLayout:
+    ScrollView:  # Rulbart område til at vise spiltilbud
+        size_hint: (1, 1)  # Brug hele den tilgængelige bredde og højde
+        GridLayout:  # Layout til at vise spiltilbud i en gitterstruktur
             id: game_list
             cols: 1
             size_hint_y: None
             height: self.minimum_height
-            row_default_height: 60
+            row_default_height: 100  # Øger højden på hver række
             row_force_default: True
+            padding: [10, 10]  # Tilføjer afstand omkring indholdet
+            spacing: 10  # Øger mellemrum mellem rækkerne
+
+
+
+
+
+
+
+
+
+            #id: game_list  # ID til nem adgang i koden
+            #cols: 1  # Sætter antallet af kolonner til én
+            #size_hint_y: None  # Deaktiverer størrelsesjustering i højden
+            #height: self.minimum_height  # Højde tilpasset det samlede indhold
+            #row_default_height: 60  # Standardhøjde for hver række
+            #row_force_default: True  # Tvinger alle rækker til at have samme højde
 
             # Dynamisk oprettelse af tilbud
-            Label:
-                text: "Ingen spiltilbud endnu." if not root.game_deals else ""
-                size_hint_y: None
-                height: 60
+            #Label:  # Etiket til at vise besked, hvis der ikke er spiltilbud
+                #text: "Ingen spiltilbud endnu." if not root.game_deals else ""  # Viser besked, hvis listen er tom
+                #size_hint_y: None  # Deaktiverer størrelsesjustering i højden
+                #height: 60  # Fast højde for etiketten
+
             # Bind hver spiltilbud dynamisk
-            Label:
-                #text: f"{deal['title']} - {deal['salePrice']} USD ({deal['normalPrice']} USD)"
-                text: "Test"
-                size_hint_y: None
-                height: 60
+            #Label:  # Eksempel på en dynamisk etiket til spiltilbud
+                #text: f"{deal['title']} - {deal['salePrice']} USD ({deal['normalPrice']} USD)"  # Skabelon til spiltilbud
+                #text: "Test"  # Midlertidig tekst til testformål
+                #size_hint_y: None  # Deaktiverer størrelsesjustering i højden
+                #height: 60  # Fast højde for etiketten
